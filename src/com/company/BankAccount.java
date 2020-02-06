@@ -3,6 +3,7 @@ package com.company;
 public class BankAccount {
     private double balance;
     private float interestRate;
+    private int accountID;
 
     public BankAccount(){
         interestRate = 0.02f;
@@ -12,6 +13,7 @@ public class BankAccount {
         balance = initialBalance;
         interestRate = initialRate;
     }
+
 
     public void deposit(double amount){
         balance= balance + amount;
