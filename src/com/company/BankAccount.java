@@ -4,14 +4,19 @@ public class BankAccount {
     private double balance;
     private float interestRate;
     private int accountID;
+    private static int nextID = 1000;
 
-    public BankAccount(){
+    public BankAccount(){    //constructors
         interestRate = 0.02f;
+        accountID = nextID;
+        nextID = nextID+1;
     }
 
     public BankAccount(double initialBalance, float initialRate){
         balance = initialBalance;
         interestRate = initialRate;
+        accountID = nextID;
+        nextID++;
     }
 
 
@@ -33,5 +38,7 @@ public class BankAccount {
         }
         return false; //do not need else because I would have left function already if this were true
     }
-
+    public int getAccountID(){
+        return accountID;
+    }
 }
