@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Optional;
 
 public class Bank {
     private ArrayList<BankAccount> allAccounts;
@@ -23,6 +24,7 @@ public class Bank {
     }
 
     private void addCustomer(Scanner inputReader){
+        inputReader.nextLine(); //reading in trailing '\n\ character
         System.out.print("What is the new Customer's name:");
         var name = inputReader.nextLine();
         System.out.print("Enter new Customers tax ID");
@@ -31,6 +33,15 @@ public class Bank {
         allCustomers.add(currentCustomer);
         System.out.println("Successfully added new customer "+currentCustomer.getName());
 
+    }
+
+    private Optional<Customer> selectCustomer(int customerID){
+        for(var customer: allCustomers){
+            if(customer.getID() == customerID){
+                return Optional.of(customer);
+            }
+        }
+        return Optional.empty();
     }
 
     public void doBanking(){
@@ -43,7 +54,13 @@ public class Bank {
                     addCustomer(inputreader);
                     break;
                 case 2:
-                    System.out.println("Not yet implemented");
+                    System.out.print("What is the ID of the customer to select:");
+                    var id = inputreader.nextInt();
+                    var oopsThatDidntWork = selectCustomer(id);
+                    if (oopsThatDidntWork.isPresent())
+                        System.out.println("Customer " + oopsThatDidntWork.get().getName() + " selected");
+                    if (oopsThatDidntWork.isEmpty())
+                        System.out.println("That customer doesn't exist, please try again");
                     break;
                 case 3:
                     System.out.println("Not yet implemented");
